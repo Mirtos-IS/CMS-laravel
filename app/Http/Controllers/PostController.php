@@ -26,8 +26,6 @@ class PostController extends Controller
 			'post',
 			['post' => $post]
 		);
-
-
 	}
 
 	public function allPosts(){
