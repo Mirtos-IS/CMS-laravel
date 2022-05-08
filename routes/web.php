@@ -13,4 +13,8 @@ use App\Http\Controllers\{PostController};
 |
 */
 
-Route::get('/', [PostController::class, 'index']);
+Route::get('/{limit?}', [PostController::class, 'index'])
+	->where('limit', '[0-9]');
+Route::get('/admin', [PostController::class, 'admin']);
+Route::get('/admin/posts', [PostController::class, 'allPosts']);
+Route::get('/admin/posts/add', [PostController::class, 'addPosts']);

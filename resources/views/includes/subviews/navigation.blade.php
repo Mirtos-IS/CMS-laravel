@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
 				<li>
-					<a href="admin/admin_index.php">admin</a>
+					<a href="/admin">admin</a>
 				</li>
 				</ul>
 			</div>

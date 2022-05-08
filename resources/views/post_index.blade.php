@@ -13,21 +13,21 @@
 		
 
 				<!-- Post layout that gonna be looped -->
+				@foreach($posts as $post)
 				<h2>
-					<a href="post.php?post=#">Hardcoded</a>
+					<a href="post.php?post=#">{{$post->post_name}}</a>
 				</h2>
 				<p class="lead">
-					by <a href="index.php">test</a>
+					by <a href="index.php">{{$post->post_author}}</a>
 				</p>
-				<p><span class="glyphicon glyphicon-time"></span> today</p>
+				<p><span class="glyphicon glyphicon-time"></span>{{$post->created_at}}</p>
 				<hr>
-				<img class="img-responsive" src="" alt="">
+				<img class="img-responsive" src="http://picsum.photos/900/300" alt="">
 				<hr>
-				<p>Oi</p>
-				<a class="btn btn-primary" href="post.php?post=#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+				<p>{{$post->post_content}}</p>
 
 				<hr>
-
+				@endforeach
 
 			<!-- Pager -->
 			<ul class="pager">
