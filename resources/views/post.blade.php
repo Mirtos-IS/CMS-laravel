@@ -1,3 +1,4 @@
+
 @extends('includes.layout')
 
 @section('main.post')
@@ -13,7 +14,6 @@
 		
 
 				<!-- Post layout that gonna be looped -->
-				@foreach($posts as $post)
 				<h2>
 					<a href="/post/{{$post->post_id}}">{{$post->post_title}}</a>
 				</h2>
@@ -27,7 +27,6 @@
 				<p>{{$post->post_content}}</p>
 
 				<hr>
-				@endforeach
 
 			<!-- Pager -->
 			<ul class="pager">

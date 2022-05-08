@@ -26,7 +26,7 @@
 			@foreach($posts as $post)
 				<tr>
 					<th>{{$post->post_author}}</th>
-					<th>{{$post->post_title}}</th>
+					<th><a href="/post/{{$post->post_id}}">{{$post->post_title}}</a></th>
 					<th>{{$post->post_category_id}}</th>
 					<th>{{$post->post_status}}</th>
 					<th>{{$post->post_image}}</th>

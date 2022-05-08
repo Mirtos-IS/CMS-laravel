@@ -17,6 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+	protected $primaryKey = 'user_id';
     protected $fillable = [
         'user_name',
 		'user_firstname',
@@ -45,4 +46,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+	public function posts(){
+		return $this->hasMany('\App\Models\Posts', 'user_id');
+	}
 }

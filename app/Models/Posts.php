@@ -10,6 +10,7 @@ class Posts extends Model
     use HasFactory;
 
 	protected $table = 'posts';
+	protected $primaryKey = 'post_id';
 	protected $fillable = [
 		'post_category_id',
 		'post_title',
@@ -19,4 +20,16 @@ class Posts extends Model
 		'post_tags',
 		'post_status'
 	];
+
+	public function comments(){
+		return $this->hasMany('Comments');
+	}
+
+	public function user(){
+		return $this->belongsTo('\App\Model\User', 'post_id');
+	}
+
+	public function category(){
+		return $this->belongsTo('\App\Model\Categories', 'post_id');
+	}
 }

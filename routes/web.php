@@ -15,6 +15,10 @@ use App\Http\Controllers\{PostController};
 
 Route::get('/{limit?}', [PostController::class, 'index'])
 	->where('limit', '[0-9]');
+Route::get('/post/{post}', [PostController::class, 'onePost']);
 Route::get('/admin', [PostController::class, 'admin']);
 Route::get('/admin/posts', [PostController::class, 'allPosts']);
 Route::get('/admin/posts/add', [PostController::class, 'addPosts']);
+Route::get('/admin/categories/{id?}', [PostController::class , 'allCategories'])
+	->where('id', '[0-9]');
+Route::get('/admin/comments', [PostController::class , 'allComments']);

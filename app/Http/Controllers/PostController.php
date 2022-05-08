@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\{Posts, Categories};
+use App\Models\{Posts, Categories, Comments};
 
 class PostController extends Controller
 {
@@ -21,6 +21,14 @@ class PostController extends Controller
 		return view('admin.dashboard');
 	}
 
+	public function onePost(Posts $post){
+		return view(
+			'post',
+			['post' => $post]
+		);
+
+	}
+
 	public function allPosts(){
 		$posts = $this->getAllPosts();
 		return view(
@@ -30,7 +38,29 @@ class PostController extends Controller
 	}
 
 	public function addPosts(){
-		return $this->getAllCategories();
+		$cats = $this->getAllCategories();
+
+		return view(
+			'admin.add_posts',
+			compact('cats')
+		);
+	}
+
+	public function allCategories(request $request){
+		$cats = $this->getAllCategories();
+		return view(
+			'admin.categories',
+			['cats' => $cats,
+			'id' => $request->id]
+		);
+	}
+
+	public function allComments(){
+		$comments = $this->getAllComments()->get();
+		return view(
+			'admin.comments',
+			compact('comments')
+		);	
 	}
 
 	private function getAllPosts(int $limit=0){
@@ -44,9 +74,12 @@ class PostController extends Controller
 
 	private function getAllCategories(){
 		$cats = Categories::orderBy('cat_title')->get();
-		return view(
-			'admin.add_posts',
-			compact('cats')
-		);
+		return $cats;
+	}
+
+	private function getAllComments(){
+		$comments = Comments::orderBy('comment_id');
+
+		return $comments;
 	}
 }
