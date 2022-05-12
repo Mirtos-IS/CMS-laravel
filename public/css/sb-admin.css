@@ -140,6 +140,10 @@ ul.alert-dropdown {
     padding: 0;
 }
 
+.mt-3 {
+	margin-top: 1em
+}
+
 .side-nav>li>ul>li>a {
     display: block;
     padding: 10px 15px 10px 38px;

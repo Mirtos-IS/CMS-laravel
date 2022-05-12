@@ -8,7 +8,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-			<a class="navbar-brand" href="admin">CMS Admin</a>
+			<a class="navbar-brand" href="/admin">CMS Admin</a>
 	</div>
 	<!-- Top Menu Items -->
 	<ul class="nav navbar-right top-nav">
@@ -114,7 +114,7 @@
 				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>Users<i class="fa fa-fw fa-caret-down"></i></a>
 				<ul id="demo" class="collapse">
 					<li>
-						<a href="admin_users.php">View all users</a>
+						<a href="/admin/users">View all users</a>
 					</li>
 					<li>
 						<a href="admin_users.php?user=add">Add new user</a>

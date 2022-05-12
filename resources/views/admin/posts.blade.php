@@ -25,14 +25,14 @@
 			</thead>
 			@foreach($posts as $post)
 				<tr>
-					<th>{{$post->post_author}}</th>
-					<th><a href="/post/{{$post->post_id}}">{{$post->post_title}}</a></th>
-					<th>{{$post->post_category_id}}</th>
-					<th>{{$post->post_status}}</th>
-					<th>{{$post->post_image}}</th>
-					<th>{{$post->post_tag}}</th>
-					<th>{{$post->post_comment_count}}</th>
-					<th>{{$post->created_at}}</th>
+					<td>{{$post->post_author}}</td>
+					<td><a href="/post/{{$post->post_id}}">{{$post->post_title}}</a></td>
+					<td>{{$post->post_category_id}}</td>
+					<td>{{$post->post_status}}</td>
+					<td>{{$post->post_image}}</td>
+					<td>{{$post->post_tag}}</td>
+					<td>{{$post->post_comment_count}}</td>
+					<td>{{$post->created_at}}</td>
 				</tr>
 			@endforeach
 		</table>	

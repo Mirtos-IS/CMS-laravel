@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\{Posts, Categories, Comments};
+use App\Models\{Posts, Categories, Comments, User};
 
 class PostController extends Controller
 {
@@ -17,13 +17,16 @@ class PostController extends Controller
 		);
 	}
 
+	public function login(){
+		return view('login.login');
+	}
 	public function admin(){
 		return view('admin.dashboard');
 	}
 
 	public function onePost(Posts $post){
 		return view(
-			'post',
+		    'post',
 			['post' => $post]
 		);
 	}
@@ -62,6 +65,13 @@ class PostController extends Controller
 		);	
 	}
 
+	public function allUsers(){
+		$users = $this-> getAllUsers();
+		return view(
+			'admin.users',
+			compact('users')
+		);
+	}
 	private function getAllPosts(int $limit=0){
 		$posts = Posts::orderByDesc('post_id')
 			->skip(0+$limit)
@@ -80,5 +90,9 @@ class PostController extends Controller
 		$comments = Comments::orderBy('comment_id');
 
 		return $comments;
+	}
+	private function getAllUsers(){
+		$users = User::orderBy('user_name')->get();
+		return $users;
 	}
 }

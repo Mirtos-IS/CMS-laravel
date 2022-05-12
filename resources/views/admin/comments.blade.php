@@ -18,12 +18,12 @@
 				</tr>
 			</thead>
 			@foreach($comments as $comment)
-				<th><a href="/post/{{$comment->post->post_id}}">{{$comment->post->post_title}}</a></th>
-				<th>{{$comment->post->post_author}}</th>
-				<th>{{$comment->comment_content}}</th>
-				<th>{{$comment->created_at}}</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<td><a href="/post/{{$comment->post->post_id}}">{{$comment->post->post_title}}</a></td>
+				<td>{{$comment->post->post_author}}</td>
+				<td>{{$comment->comment_content}}</td>
+				<td>{{$comment->created_at}}</td>
+				<td>Edit</td>
+				<td>Delete</td>
 			@endforeach
 		</table>	
 		</div>
