@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+include 'helper/functions.php';
 
-use App\Models\{Posts, Categories, Comments, User};
+use App\Models\{Posts};
 
 class PostController extends Controller
 {
     //
 	public function index(int $limit=0){
-		$posts = $this->getAllPosts($limit);
+		$posts = getAllPosts($limit);
 		return view(
 			'post_index',
 			compact('posts')
 		);
-	}
-
-	public function login(){
-		return view('login.login');
-	}
-	public function admin(){
-		return view('admin.dashboard');
 	}
 
 	public function onePost(Posts $post){
@@ -31,68 +24,5 @@ class PostController extends Controller
 		);
 	}
 
-	public function allPosts(){
-		$posts = $this->getAllPosts();
-		return view(
-			'admin.posts',
-			compact('posts')
-		);
-	}
 
-	public function addPosts(){
-		$cats = $this->getAllCategories();
-
-		return view(
-			'admin.add_posts',
-			compact('cats')
-		);
-	}
-
-	public function allCategories(request $request){
-		$cats = $this->getAllCategories();
-		return view(
-			'admin.categories',
-			['cats' => $cats,
-			'id' => $request->id]
-		);
-	}
-
-	public function allComments(){
-		$comments = $this->getAllComments()->get();
-		return view(
-			'admin.comments',
-			compact('comments')
-		);	
-	}
-
-	public function allUsers(){
-		$users = $this-> getAllUsers();
-		return view(
-			'admin.users',
-			compact('users')
-		);
-	}
-	private function getAllPosts(int $limit=0){
-		$posts = Posts::orderByDesc('post_id')
-			->skip(0+$limit)
-			->take('20')
-			->get();
-
-		return $posts;
-	}
-
-	private function getAllCategories(){
-		$cats = Categories::orderBy('cat_title')->get();
-		return $cats;
-	}
-
-	private function getAllComments(){
-		$comments = Comments::orderBy('comment_id');
-
-		return $comments;
-	}
-	private function getAllUsers(){
-		$users = User::orderBy('user_name')->get();
-		return $users;
-	}
 }

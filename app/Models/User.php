@@ -16,7 +16,9 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
-     */
+	 */
+	protected $table = 'users';
+
 	protected $primaryKey = 'user_id';
     protected $fillable = [
         'user_name',
@@ -49,5 +51,13 @@ class User extends Authenticatable
 
 	public function posts(){
 		return $this->hasMany('\App\Models\Posts', 'user_id');
+	}
+
+	public function user_name(){
+		return $this->user_name;
+	}
+
+	public function getAuthPassword(){
+		return $this->user_password;
 	}
 }

@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{PostController};
+use App\Http\Controllers\{PostController, 
+						  AdminController, 
+						  RegisterController, 
+						  LogController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +17,24 @@ use App\Http\Controllers\{PostController};
 */
 
 //Routes for the Blog, no auth require
-
 Route::get('/{limit?}', [PostController::class, 'index'])
 	->where('limit', '[0-9]');
 Route::get('/post/{post}', [PostController::class, 'onePost']);
 
+//Routes for all Log functionality
+Route::get('/login', [LogController::class, 'login'])
+	->name('login');
+Route::get('/logout', [LogController::class, 'logout']);
+Route::post('/login', [LogController::class, 'loginAuth']);
+
+Route::get('/login/create', [RegisterController::class, 'create']);
+Route::post('/login/create', [RegisterController::class, 'store']);
+
 //Routes for Admin panel
-
-Route::get('/login', [PostController::class, 'login']);
-
-Route::get('/admin', [PostController::class, 'admin']);
-Route::get('/admin/posts', [PostController::class, 'allPosts']);
-Route::get('/admin/posts/add', [PostController::class, 'addPosts']);
-Route::get('/admin/categories/{id?}', [PostController::class , 'allCategories'])
+Route::get('/admin', [AdminController::class, 'admin']);
+Route::get('/admin/posts', [AdminController::class, 'allPosts']);
+Route::get('/admin/posts/add', [AdminController::class, 'addPosts']);
+Route::get('/admin/categories/{id?}', [AdminController::class , 'allCategories'])
 	->where('id', '[0-9]');
-Route::get('/admin/comments', [PostController::class , 'allComments']);
-Route::get('/admin/users', [PostController::class,  'allUsers']);
+Route::get('/admin/comments', [AdminController::class , 'allComments']);
+Route::get('/admin/users', [AdminController::class,  'allUsers']);
