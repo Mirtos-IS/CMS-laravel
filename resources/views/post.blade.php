@@ -22,7 +22,7 @@
 				</p>
 				<p><span class="glyphicon glyphicon-time"></span>{{$post->created_at}}</p>
 				<hr>
-				<img class="img-responsive" src="http://picsum.photos/900/300" alt="">
+				<img class="img-responsive" src="{{$post->image_url}}" alt="">
 				<hr>
 				<p>{{$post->post_content}}</p>
 

@@ -18,7 +18,7 @@
 					<a href="/admin">admin</a>
 				</li>
 				<li>
-					<a href="/login">Login</a>
+					<a href="/admin">Login</a>
 				</li>
 				</ul>
 			</div>

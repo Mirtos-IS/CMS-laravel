@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{PostController, 
 						  AdminController, 
 						  RegisterController, 
-						  LogController};
+						  LogController,
+						  EmailController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,9 +33,30 @@ Route::post('/login/create', [RegisterController::class, 'store']);
 
 //Routes for Admin panel
 Route::get('/admin', [AdminController::class, 'admin']);
+
+//Routes for Admin posts
 Route::get('/admin/posts', [AdminController::class, 'allPosts']);
+
 Route::get('/admin/posts/add', [AdminController::class, 'addPosts']);
+Route::post('/admin/posts/add', [AdminController::class, 'storePost']);
+
+Route::delete('/admin/posts/delete/{post_id}', [AdminController::class, 'destroyPost']);
+
+Route::get('/admin/posts/edit/{post_id}', [AdminController::class, 'editPost']);
+Route::put('/admin/posts/edit/{post_id}', [AdminController::class, 'updatePost']);
+
+//Routes for Categories in Admin
 Route::get('/admin/categories/{id?}', [AdminController::class , 'allCategories'])
 	->where('id', '[0-9]');
+
+//Routes for Admin Comments
 Route::get('/admin/comments', [AdminController::class , 'allComments']);
+
+//Routes for admin Users
 Route::get('/admin/users', [AdminController::class,  'allUsers']);
+
+//Routes for Emails
+Route::get('/email/{name}', [EmailController::class, 'email']);
+
+Route::get('/sendemail', [EmailController::class, 'sendemail']);
+

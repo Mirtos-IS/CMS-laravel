@@ -21,10 +21,10 @@ return new class extends Migration
 				->on('categories');
 			$table->string('post_title');
 			$table->string('post_author');
-			$table->string('post_image');
+			$table->string('post_image')->default(Null);
 			$table->text('post_content');
 			$table->string('post_tag');
-			$table->bigInteger('post_comment_count');
+			$table->bigInteger('post_comment_count')->default(0);
 			$table->string('post_status');
             $table->timestamps();
         });

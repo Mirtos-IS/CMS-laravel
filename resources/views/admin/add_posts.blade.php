@@ -10,6 +10,7 @@
 			<div class="col-xs-6">
 				<!--Add postegory form -->
 				<form action="" method="post" enctype="multipart/form-data">
+					@csrf
 					<div class="form-group">
 						<label for="post-title">Post Title</label>
 						<input type="text" class="form-control" name="post_title">
