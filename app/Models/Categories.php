@@ -19,4 +19,9 @@ class Categories extends Model
 	public function posts(){
 		return $this->hasMany('\App\Model\Posts', 'cat_id');
 	}
+
+    public static function getAllCategories(){
+        $cats = Categories::orderBy('cat_title')->get();
+        return $cats;
+    }
 }

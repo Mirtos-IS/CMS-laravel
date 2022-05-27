@@ -5,6 +5,7 @@ use App\Http\Controllers\{PostController,
 						  AdminController, 
 						  RegisterController, 
 						  LogController,
+                          CommentsController,
 						  EmailController};
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\{PostController,
 Route::get('/{limit?}', [PostController::class, 'index'])
 	->where('limit', '[0-9]');
 Route::get('/post/{post}', [PostController::class, 'onePost']);
+Route::post('/post/{post}', [CommentsController::class, 'storeComment']);
 
 //Routes for all Log functionality
 Route::get('/login', [LogController::class, 'login'])
@@ -28,7 +30,7 @@ Route::get('/login', [LogController::class, 'login'])
 Route::get('/logout', [LogController::class, 'logout']);
 Route::post('/login', [LogController::class, 'loginAuth']);
 
-Route::get('/login/create', [RegisterController::class, 'create']);
+Route::get('/login/create', [LogController::class, 'create']);
 Route::post('/login/create', [RegisterController::class, 'store']);
 
 //Routes for Admin panel
@@ -40,7 +42,7 @@ Route::get('/admin/posts', [AdminController::class, 'allPosts']);
 Route::get('/admin/posts/add', [AdminController::class, 'addPosts']);
 Route::post('/admin/posts/add', [AdminController::class, 'storePost']);
 
-Route::delete('/admin/posts/delete/{post_id}', [AdminController::class, 'destroyPost']);
+Route::get('/admin/posts/delete/{post_id}', [AdminController::class, 'destroyPost']);
 
 Route::get('/admin/posts/edit/{post_id}', [AdminController::class, 'editPost']);
 Route::put('/admin/posts/edit/{post_id}', [AdminController::class, 'updatePost']);
@@ -51,6 +53,7 @@ Route::get('/admin/categories/{id?}', [AdminController::class , 'allCategories']
 
 //Routes for Admin Comments
 Route::get('/admin/comments', [AdminController::class , 'allComments']);
+Route::delete('/admin/comments/{id}', [CommentsController::class , 'deleteComment']);
 
 //Routes for admin Users
 Route::get('/admin/users', [AdminController::class,  'allUsers']);

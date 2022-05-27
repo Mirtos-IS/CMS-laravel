@@ -31,7 +31,7 @@ class Posts extends Model
 	}
 
 	public function comments(){
-		return $this->hasMany(Comments::class, 'post_id');
+		return $this->hasMany(Comments::class, 'comment_post_id','post_id' );
 	}
 
 	public function user(){
@@ -39,6 +39,15 @@ class Posts extends Model
 	}
 
 	public function category(){
-		return $this->belongsTo(Categories::class, 'post_category_id');
+		return $this->belongsTo(Categories::class, 'post_category_id', 'cat_id');
 	}
+
+    public static function getAllPosts(int $limit=0){
+        $posts = Posts::orderByDesc('post_id')
+            ->skip(0+$limit)
+            ->take('20')
+            ->get();
+
+        return $posts;
+    }
 }

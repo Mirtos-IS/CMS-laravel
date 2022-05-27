@@ -20,6 +20,10 @@ class LogController extends Controller
 		return redirect('/');
 	}	
 
+	public function create(){
+		return view('login.create');
+	}
+
 	public function loginAuth(Request $request){
 		/* if (!Auth::attempt($request->only(['user_name','password']))){ */
 		if (!Auth::attempt([

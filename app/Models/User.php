@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Storage;
 
 class User extends Authenticatable
 {
@@ -49,6 +50,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+	public function getImageUrlAttribute(){
+		if (!$this->user_image){
+            return Storage::url('no_image.jpg');
+		}
+        return Storage::url($this->user_image);
+	}
+
 	public function posts(){
 		return $this->hasMany('\App\Models\Posts', 'user_id');
 	}
@@ -60,4 +68,10 @@ class User extends Authenticatable
 	public function getAuthPassword(){
 		return $this->user_password;
 	}
+
+    
+    public static function getAllUsers(){
+        $users = User::orderByDesc('user_name')->get();
+        return $users;
+    }
 }

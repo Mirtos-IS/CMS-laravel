@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-include 'helper/functions.php';
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
