@@ -1,0 +1,187 @@
+#funcionalities of the aplication
+1. Users:
+    For verification reasons, all users will need to provide unique usernames (name) and unique email (email)
+    and the email should be verified via email.
+
+    a password, that will be hashed for security reasons, also will be necessary.
+
+    a token is created for allow to the user to maintein a session and not need to restabilish authentication
+
+    An user will have not only his username, but first and last name. He will be able to put a photo of him or anything
+    he would like as his profile picture, and if non are given, a default one (no-image) should be used.
+
+    A timestamp is created for both the time it's created and the time it's modified to better keep tracking
+
+    1.1. Storage:
+        information needed:
+        user {
+        '
+         name:
+         first_name:
+         last_name:
+         image:
+         email:
+         password:
+        '
+        }
+        an email for verification should be sent at the moment of registration.
+        a token should be created and added.
+        password should be hashed using Laravel's built-in Hash() function. '
+
+    1.2. Updating:
+        any of the following information can be modified without verification by the user:
+        user {
+        '
+         first_name:
+         last_name:
+         image:
+        '
+        }
+
+        the following information can be modified only with a verification sent via their email
+        user{'
+            password
+        '}
+
+        email and username cannot be modified
+
+    1.3. Retriving Data:
+        1.3.1. For Comments:
+            for comments the following informations are given:
+                user{'
+                    id:
+                    name:
+                    image:
+                '}
+        1.3.2. For Users Profile:
+            for the user to modified it's own stats, the following informations are given: '
+                user {'
+                    id:
+                    name:
+                    first_name:
+                    last_name:
+                    image:
+                '}
+
+2. Posts
+    Any User will be able to create and manage it's own posts that will be shown in the website, its done via the 
+    admin panel after authentication. '
+
+    posts are organized in categories using the categories tables' id.
+    posts are also organized using the creator' user_id
+
+    posts has categories that are indentified using category_id as a foreign key to the category table
+
+    user_id is used to link to the user table to get it's name. '
+
+    tag can also be used to help searching some specific post.
+
+    You will be able to keep track of the number of comments. a function should be called in the moment of a comment (4.0)
+
+    posts can be changed, but if done, a "edited" mark should be put into their posts to indicate an modification.
+
+    A timestamp is created for both the time it's created and the time it's modified to better keep tracking and to 
+    see if a post was edited or not by comparing both times.
+
+    2.1. Storage:
+        the following informations are need to create a new post:
+        post {'
+            category_id (see 3.0):
+            user_id (see 1.0):
+            title:
+            image:
+            content:
+            tag:
+            status:
+        '}
+
+    2.2. Updating:
+        Any of the following informations can only be changed by the user:
+        post {'
+            category_id (see 3.0):
+            title:
+            image:
+            content:
+            tag:
+            status:
+        '}
+        
+        Author (user_id) cannot be changed.
+
+    2.3. Retriving Data:
+        Any data can only be sent in maximum of 20 itens packets, that will be called pages.
+
+        informations that can be given:
+            post {'
+                id:
+                category name (using category_id, see 3.0):
+                user name (using user_id, see 1.0):
+                title:
+                image:
+                content:
+                tag:
+                created_at:
+                updated_at
+           '}       
+
+3.0. Categories:
+    Categories are used to organize posts and can be added by any user
+
+    3.1. Storage:
+        categories are very simple, with just one element that can be added
+        category {'
+            name:
+        '}
+
+    3.2 Updating:
+        the following information can be updated:
+        category{'
+          name:  
+        '}
+
+    3.3 Retriving Data:
+        the following information can be retrieved:
+        category{'
+            id:
+            name:
+        '}
+
+4.0. Comments:
+    comments are added into posts and are indentified by its 'id' with a foreign key
+
+    it uses the user_id to get both name and the user picture
+
+    date are added in the moment it's created.
+
+    content is the actual comment. it's stored as a text.
+
+    When a comment is created, should be incremented the comment_count in the post table of the post.
+    
+    4.1 Storage:
+        The following informations are need to be created:
+        comment {'
+            post_id:
+            user_id:
+            content:
+        '}
+
+    4.2 Updating:
+        the following informations can be modified by the user only:
+        comment{'
+            content:
+        '}
+
+    4.3 Retriving Data:
+        The following informations can be given:
+        comment{'
+            id:
+            post_id:
+            user_id:
+            content:
+            created_at:
+            updated_at
+        '}
+
+5.0. Methods for interacting with the database:
+    5.1. Posts
+        All methods for interacting with the post table is place in \App\Repositories\PostRepository

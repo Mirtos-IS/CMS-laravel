@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\{Posts};
+use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
     //
 	public function index(int $limit=0){
-		$posts = Posts::getAllPosts($limit);
+		$posts = new PostRepository;
+        $posts = $posts->allPosts();
 		return view(
 			'post_index',
 			compact('posts')

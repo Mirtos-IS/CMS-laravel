@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mail\NewPost;
 use App\Models\{Posts, Comments, Categories, User};
-
+use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -18,13 +18,14 @@ class AdminController extends Controller
 		$this->middleware('auth');
 	}
 
-
 	public function admin(){
 		return view('admin.dashboard');
 	}
 
 	public function allPosts(){
-		$posts = Posts::getAllPosts();
+		$posts = new PostRepository;
+        $posts = $posts->allPosts();
+        
 		return view(
 			'admin.posts',
 			compact('posts')
@@ -40,43 +41,22 @@ class AdminController extends Controller
 		);
 	}
 
-	public function storePost(Request $request){
-		$post_image = null;
-		if ($request->hasFile('post_image')){
-			$post_image = $request->file('post_image')->store('posts');
-		}
-
-		Posts::create([
-			'post_title' => $request->post_title,
-			'post_image' => $post_image,
-			'post_category_id' => $request->post_category_id,
-			'post_author' => $request->post_author,
-			'post_tag' => $request->post_tag,
-			'post_status' => $request->post_status,
-			'post_content' => $request->post_content,
-		]);
-
-		event(new NewEmailPost($request->post_title));
+	public function storePost(){
+        $post = new PostRepository;
+        $post->store();
 
 		return redirect('/admin/posts');
-		
 	}
 
-	public function destroyPost(Request $request){
+	public function destroyPost($id) {
+        $post = new PostRepository;
+        $post->destroy($id);
 
-		$post_image = Posts::find($request->post_id)
-					  ->post_image;
-		
-		if ($post_image){
-			Storage::delete($post_image);
-		}
-
-		Posts::destroy($request->post_id);
 		return redirect()->back();
-	}
+    }
 
 	public function editPost(Request $request){
-		$post = Posts::find($request->post_id);
+		$post = Posts::find($request->id);
 		$cats = Categories::getAllCategories();
 
 		return view(
@@ -85,26 +65,10 @@ class AdminController extends Controller
 			 'cats' => $cats]
 		);
 	}
+	public function updatePost() {
+        $post = new PostRepository;
+        $post->update();
 
-	public function updatePost(Request $request){
-		Posts::where('post_id', $request->post_id)
-			->update([
-				'post_title' => $request->post_title,
-				'post_category_id' => $request->post_category_id,
-				'post_author' => $request->post_author,
-				'post_tag' => $request->post_tag,
-				'post_status' => $request->post_status,
-				'post_content' => $request->post_content,
-			]);
-		if ($request->post_image){
-			$post_image = Posts::find($request->post_id)->image_url;
-			Storage::delete($post_image);
-
-			Posts::where('post_id', $request->post_id)
-				->update([
-					'post_image' => $request->file('post_image')->store('posts')
-				]);
-		}
 		return redirect('/admin/posts');
 	}
 

@@ -31,32 +31,35 @@ Route::get('/logout', [LogController::class, 'logout']);
 Route::post('/login', [LogController::class, 'loginAuth']);
 
 Route::get('/login/create', [LogController::class, 'create']);
-Route::post('/login/create', [RegisterController::class, 'store']);
+Route::post('/login/create', [RegisterController::class, 'register']);
 
 //Routes for Admin panel
-Route::get('/admin', [AdminController::class, 'admin']);
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin','admin');
 
-//Routes for Admin posts
-Route::get('/admin/posts', [AdminController::class, 'allPosts']);
+    //Routes for Admin posts
+    Route::get('/admin/posts', 'allPosts');
 
-Route::get('/admin/posts/add', [AdminController::class, 'addPosts']);
-Route::post('/admin/posts/add', [AdminController::class, 'storePost']);
+    Route::get('/admin/posts/add',  'addPosts');
+    Route::post('/admin/posts/add', 'storePost');
 
-Route::get('/admin/posts/delete/{post_id}', [AdminController::class, 'destroyPost']);
+    Route::get('/admin/posts/delete/{id}', 'destroyPost');
 
-Route::get('/admin/posts/edit/{post_id}', [AdminController::class, 'editPost']);
-Route::put('/admin/posts/edit/{post_id}', [AdminController::class, 'updatePost']);
+    Route::get('/admin/posts/edit/{id}', 'editPost');
+    Route::put('/admin/posts/edit/{id}', 'updatePost');
 
-//Routes for Categories in Admin
-Route::get('/admin/categories/{id?}', [AdminController::class , 'allCategories'])
-	->where('id', '[0-9]');
+    //Routes for Categories in Admin
+    Route::get('/admin/categories/{id?}', 'allCategories')
+        ->where('id', '[0-9]');
 
-//Routes for Admin Comments
-Route::get('/admin/comments', [AdminController::class , 'allComments']);
+    //Routes for Admin Comments
+    Route::get('/admin/comments','allComments');
+    
+    Route::get('/admin/users', 'allUsers');
+});
 Route::delete('/admin/comments/{id}', [CommentsController::class , 'deleteComment']);
 
 //Routes for admin Users
-Route::get('/admin/users', [AdminController::class,  'allUsers']);
 
 //Routes for Emails
 Route::get('/email/{name}', [EmailController::class, 'email']);

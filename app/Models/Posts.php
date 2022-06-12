@@ -42,12 +42,4 @@ class Posts extends Model
 		return $this->belongsTo(Categories::class, 'post_category_id', 'cat_id');
 	}
 
-    public static function getAllPosts(int $limit=0){
-        $posts = Posts::orderByDesc('post_id')
-            ->skip(0+$limit)
-            ->take('20')
-            ->get();
-
-        return $posts;
-    }
 }

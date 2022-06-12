@@ -20,15 +20,13 @@ class User extends Authenticatable
 	 */
 	protected $table = 'users';
 
-	protected $primaryKey = 'user_id';
     protected $fillable = [
-        'user_name',
-		'user_firstname',
-		'user_lastname',
-		'user_password',
-		'user_email',
-		'user_image',
-		'user_role'
+        'name',
+		'first_name',
+		'last_name',
+		'password',
+		'email',
+		'image',
     ];
 
     /**
@@ -37,7 +35,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'user_password',
+        'password',
         'remember_token',
     ];
 
@@ -51,27 +49,22 @@ class User extends Authenticatable
     ];
 
 	public function getImageUrlAttribute(){
-		if (!$this->user_image){
+		if (!$this->image){
             return Storage::url('no_image.jpg');
 		}
-        return Storage::url($this->user_image);
+        return Storage::url($this->image);
 	}
 
 	public function posts(){
-		return $this->hasMany('\App\Models\Posts', 'user_id');
+		return $this->hasMany('\App\Models\Posts', 'id');
 	}
 
-	public function user_name(){
-		return $this->user_name;
+	public function name(){
+		return $this->name;
 	}
-
-	public function getAuthPassword(){
-		return $this->user_password;
-	}
-
     
     public static function getAllUsers(){
-        $users = User::orderByDesc('user_name')->get();
+        $users = User::orderByDesc('name')->get();
         return $users;
     }
 }

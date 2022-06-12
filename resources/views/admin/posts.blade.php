@@ -27,16 +27,16 @@
 			</thead>
 			@foreach($posts as $post)
 				<tr>
-					<td>{{$post->post_author}}</td>
-					<td><a href="/post/{{$post->post_id}}">{{$post->post_title}}</a></td>
-					<td>{{$post->category->cat_title}}</td>
-					<td>{{$post->post_status}}</td>
+					<td>{{$post->author}}</td>
+					<td><a href="/post/{{$post->id}}">{{$post->title}}</a></td>
+					<td>{{$post->category->name}}</td>
+					<td>{{$post->status}}</td>
 					<td><img src="{{$post->image_url}}" width="200px"></td>
-					<td>{{$post->post_tag}}</td>
-					<td>{{$post->post_comment_count}}</td>
+					<td>{{$post->tag}}</td>
+					<td>{{$post->comment_count}}</td>
 					<td>{{$post->created_at}}</td>
-					<td><a href="/admin/posts/edit/{{$post->post_id}}">Edit</a></td>
-					<td><a href="/admin/posts/delete/{{$post->post_id}}">Delete</a></td>
+					<td><a href="/admin/posts/edit/{{$post->id}}">Edit</a></td>
+					<td><a href="/admin/posts/delete/{{$post->id}}">Delete</a></td>
 				</tr>
 			@endforeach
 		</table>	

@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\{Posts, Categories, Comments, User};
+use App\Repositories\UserRepository;
 
 class RegisterController extends Controller
 {
 
-	public function store(Request $request){
-		$data = $request->except('_token');
-		$data['user_password'] = Hash::make($data['user_password']);
-		$user = User::create($data);
+	public function register(Request $request){
+        $user = new UserRepository;
+        $user = $user->store($request);
 
 		Auth::login($user);
-		return redirect('/admin');
+        return redirect('/admin');
 	}
 }

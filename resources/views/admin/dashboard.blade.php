@@ -4,7 +4,7 @@
  <div class="col-lg-12">
 	<h1 class="page-header">
 		Welcome to admin
-		<small>{{Auth::user()['user_name']}}</small>
+		<small>{{Auth::\App\Models\User->select('name')->get()}}</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li>

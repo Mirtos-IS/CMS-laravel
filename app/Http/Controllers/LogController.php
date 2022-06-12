@@ -25,15 +25,15 @@ class LogController extends Controller
 	}
 
 	public function loginAuth(Request $request){
-		/* if (!Auth::attempt($request->only(['user_name','password']))){ */
+		/* if (!Auth::attempt($request->only(['name','password']))){ */
 		if (!Auth::attempt([
-			'user_name' => $request['user_name'],
-			'password' => $request['user_password']])){
+			'name' => $request['name'],
+			'password' => $request['password']])){
 
-			echo "<h1> {$request['user_name']} {$request['user_password']} </h1>";
+			echo "<h1> {$request['name']} {$request['password']} </h1>";
 			return redirect()
 				->back()
-				->withErrors($request['user_name'] . ' ' . $request['user_password']);
+				->withErrors($request['name'] . ' ' . $request['password']);
 		}
 		$request->session()->regenerate();
 		return redirect('/admin');

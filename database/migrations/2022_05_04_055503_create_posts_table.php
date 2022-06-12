@@ -14,18 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id('post_id');
-			$table->unsignedBigInteger('post_category_id');
-			$table->foreign('post_category_id')
-		 		->references('cat_id')
-				->on('categories');
-			$table->string('post_title');
-			$table->string('post_author');
-			$table->string('post_image')->default(Null);
-			$table->text('post_content');
-			$table->string('post_tag');
-			$table->bigInteger('post_comment_count')->default(0);
-			$table->string('post_status');
+            $table->id();
+			$table->foreignId('category_id')->constrained();
+			$table->foreignId('user_id')->constrained();
+			$table->string('title');
+			$table->string('image')->nullable();
+			$table->text('content');
+			$table->string('tag');
+			$table->bigInteger('comment_count')->default(0);
+			$table->string('status');
             $table->timestamps();
         });
     }
