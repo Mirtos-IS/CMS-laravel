@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mail\NewPost;
 use App\Models\{Posts, Comments, Categories, User};
-use App\Repositories\PostRepository;
+use App\Repositories\{CategoryRepository, PostRepository};
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -24,7 +24,7 @@ class AdminController extends Controller
 
 	public function allPosts(){
 		$posts = new PostRepository;
-        $posts = $posts->allPosts();
+        $posts = $posts->all();
         
 		return view(
 			'admin.posts',
@@ -33,17 +33,19 @@ class AdminController extends Controller
 	}
 
 	public function addPosts(){
-		$cats = Categories::getAllCategories();
+        $categories = new CategoryRepository;
+		$categories = $categories->all();
 
 		return view(
 			'admin.add_posts',
-			compact('cats')
+			compact('categories')
 		);
 	}
 
-	public function storePost(){
+	public function storePost(Request $request){
         $post = new PostRepository;
-        $post->store();
+        $user_id = Auth::user()->id;
+        $post->store($request, $user_id);
 
 		return redirect('/admin/posts');
 	}
@@ -65,21 +67,36 @@ class AdminController extends Controller
 			 'cats' => $cats]
 		);
 	}
-	public function updatePost() {
+	public function updatePost(Request $request) {
         $post = new PostRepository;
-        $post->update();
+        $post->update($request);
 
 		return redirect('/admin/posts');
 	}
 
 	public function allCategories(Request $request){
-		$cats = Categories::getAllCategories();
+        $categories = new CategoryRepository;
+		$categories = $categories->all();
 		return view(
 			'admin.categories',
-			['cats' => $cats,
+			['categories' => $categories,
 			'id' => $request->id]
 		);
 	}
+
+    public function storeCategory(Request $request){
+        $category = new CategoryRepository;
+        $category = $category->store($request);
+
+        return redirect()->back();
+    }
+
+    public function updateCategory(Request $request, int $id){
+        $category = new CategoryRepository;
+        $category = $category->update($request, $id);
+
+        return redirect()->back();
+    }
 
 	public function allComments(){
         $comments = Comments::getAllComments();

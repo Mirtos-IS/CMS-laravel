@@ -62,9 +62,4 @@ class User extends Authenticatable
 	public function name(){
 		return $this->name;
 	}
-    
-    public static function getAllUsers(){
-        $users = User::orderByDesc('name')->get();
-        return $users;
-    }
 }

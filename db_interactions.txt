@@ -155,7 +155,7 @@
 
     content is the actual comment. it's stored as a text.
 
-    When a comment is created, should be incremented the comment_count in the post table of the post.
+    When a comment is created, it should incremented the comment_count in the post table of the post.
     
     4.1 Storage:
         The following informations are need to be created:

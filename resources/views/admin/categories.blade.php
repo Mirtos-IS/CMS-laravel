@@ -9,10 +9,11 @@
 			</h1>
 			<div class="col-xs-6">
 				<!--Add category form -->
-				<form action="admin_categories.php" method="post">
+				<form action="" method="post">
+                    @csrf
 					<div class="form-group">
-						<label for="cat-title">Add Category</label>
-						<input type="text" class="form-control" name="cat_title">
+						<label for="name">Add Category</label>
+						<input type="text" class="form-control" name="name">
 					</div>
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" name="submit" value="Add Category">
@@ -21,9 +22,12 @@
 				<!-- updating category form -->
 				@if ($id)
 				<form action="" method="post">
+                    @method('PATCH')
+                    @csrf
 					<div class="form-group">
 						<label for="cat-title">Edit Category</label>
-						<input type="text" class="form-control" name="cat_title" value="{{\App\Models\Categories::find($id)->cat_title}}">
+						<input type="text" class="form-control" name="name" 
+                               value="{{\App\Models\Category::find($id)->name}}">
 					</div>
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" name="edit" value="Update Category">
@@ -40,11 +44,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($cats as $cat)
+					@foreach($categories as $category)
 					<tr>
-						<td>{{$cat->cat_id}}</td>
-						<td>{{$cat->cat_title}}</td>
-						<td><a href="/admin/categories/{{$cat->cat_id}}">Edit</a></td>
+						<td>{{$category->id}}</td>
+						<td>{{$category->name}}</td>
+						<td><a href="/admin/categories/{{$category->id}}">Edit</a></td>
 					</tr>
 					@endforeach
 				</tbody>

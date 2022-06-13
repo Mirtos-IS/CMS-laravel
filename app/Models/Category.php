@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Category extends Model
 {
 	use HasFactory;
 
 	protected $table = 'categories';
 
-	protected $primaryKey = 'cat_id';
-	protected $fillable = ['cat_title'];
+	protected $fillable = ['name'];
 
 	public $timestamps = false;
 
@@ -20,8 +19,5 @@ class Categories extends Model
 		return $this->hasMany('\App\Model\Posts', 'cat_id');
 	}
 
-    public static function getAllCategories(){
-        $cats = Categories::orderBy('cat_title')->get();
-        return $cats;
-    }
+
 }

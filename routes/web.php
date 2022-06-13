@@ -49,8 +49,9 @@ Route::controller(AdminController::class)->group(function () {
     Route::put('/admin/posts/edit/{id}', 'updatePost');
 
     //Routes for Categories in Admin
-    Route::get('/admin/categories/{id?}', 'allCategories')
-        ->where('id', '[0-9]');
+    Route::get('/admin/categories/{id?}', 'allCategories')->where('id', '[0-9]');
+    Route::post('/admin/categories/{id?}', 'storeCategory')->where('id', '[0-9]');
+    Route::patch('/admin/categories/{id}', 'updateCategory')->where('id', '[0-9]');
 
     //Routes for Admin Comments
     Route::get('/admin/comments','allComments');
@@ -58,8 +59,6 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/users', 'allUsers');
 });
 Route::delete('/admin/comments/{id}', [CommentsController::class , 'deleteComment']);
-
-//Routes for admin Users
 
 //Routes for Emails
 Route::get('/email/{name}', [EmailController::class, 'email']);

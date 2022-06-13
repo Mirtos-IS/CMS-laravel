@@ -27,9 +27,9 @@
 			</thead>
 			@foreach($posts as $post)
 				<tr>
-					<td>{{$post->author}}</td>
+					<td>{{$post->name}}</td>
 					<td><a href="/post/{{$post->id}}">{{$post->title}}</a></td>
-					<td>{{$post->category->name}}</td>
+					<td>{{$post->category_name}}</td>
 					<td>{{$post->status}}</td>
 					<td><img src="{{$post->image_url}}" width="200px"></td>
 					<td>{{$post->tag}}</td>

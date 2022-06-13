@@ -8,11 +8,11 @@
 		@include('login.error', ['errors' => $errors])
 		<div class="input-group">
 			<label for="user_name">Username</label>
-			<input class="form-control" type="text" id="user_name" name="user_name" required>
+			<input class="form-control" type="text" id="name" name="name" required>
 		</div>
 		<div class="input-group">
 			<label for="user_password">Password</label>
-			<input class="form-control" type="password" id="password" name="user_password" required >
+			<input class="form-control" type="password" id="password" name="password" required >
 		</div>
 		<div class="input-group">
 			<button class="btn btn-primary mt-3" type="submit" value="submit" name="submit">Submit</button>

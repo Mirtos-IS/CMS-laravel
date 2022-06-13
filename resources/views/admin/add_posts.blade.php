@@ -12,35 +12,31 @@
 				<form action="" method="post" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-						<label for="post-title">Post Title</label>
-						<input type="text" class="form-control" name="post_title">
+						<label for="title">Post Title</label>
+						<input type="text" class="form-control" name="title">
 					</div>
 					<div class="form-group">
-						<label for="post-category_id">Post Category</label>
+						<label for="category_id">Post Category</label>
 						<div>
-						<select id="" name="post_category_id">
-							@foreach($cats as $cat)
-								<option value="{{$cat->cat_id}}">{{$cat->cat_title}}</option>
+						<select id="" name="category_id">
+							@foreach($categories as $category)
+								<option value="{{$category->id}}">{{$category->name}}</option>
 							@endforeach
 						</select>
 					</div>
 					</div>
 					<div class="form-group">
-						<label for="post-author">Post Author</label>
-						<input type="text" class="form-control" name="post_author">
-					</div>
-					<div class="form-group">
 						<label for="post-tag">Post Tag</label>
-						<input type="text" class="form-control" name="post_tag">
+						<input type="text" class="form-control" name="tag">
 					</div>
 					<div class="form-group">
 						<label for="post-image">Post Image</label>
-						<input type="file" name="post_image">
+						<input type="file" name="image">
 					</div>
 					<div class="form-group">
 						<label for="post-status">Post status</label>
 						<div>
-						<select value="draft" name="post_status">
+						<select value="draft" name="status">
 							<option value="Draft">Draft</option>
 							<option value="Published">Published</option>
 						</select>
@@ -48,7 +44,7 @@
 					</div>
 					<div class="form-group">
 						<label for="post-content">Post Content</label>
-						<textarea class="form-control" name="post_content" id="" name="" cols="30" rows="10"></textarea>
+						<textarea class="form-control" name="content" id="" name="" cols="30" rows="10"></textarea>
 					</div>
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" name="submit" value="Add Post">
