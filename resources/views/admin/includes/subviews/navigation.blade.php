@@ -8,7 +8,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-			<a class="navbar-brand" href="/admin">CMS Admin</a>
+			<a class="navbar-brand" href="/">CMS Admin</a>
 	</div>
 	<!-- Top Menu Items -->
 	<ul class="nav navbar-right top-nav">
@@ -118,18 +118,10 @@
 				<a href="/admin/comments"><i class="fa fa-fw fa-file"></i>Comments</a>
 			</li>
 			<li>
-				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>Users<i class="fa fa-fw fa-caret-down"></i></a>
-				<ul id="demo" class="collapse">
-					<li>
-						<a href="/admin/users">View all users</a>
-					</li>
-					<li>
-						<a href="admin_users.php?user=add">Add new user</a>
-					</li>
-				</ul>
+				<a href="/admin/users"><i class="fa fa-fw fa-arrows-v"></i>Users</a>
+            </li>
 			<li>
-				<a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i>Profile</a>
-			</li>
+				<a href="/admin/profile"><i class="fa fa-fw fa-dashboard"></i>Profile</a>
 			</li>
 		</ul>
 	</div>

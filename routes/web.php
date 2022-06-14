@@ -22,7 +22,6 @@ use App\Http\Controllers\{PostController,
 Route::get('/{limit?}', [PostController::class, 'index'])
 	->where('limit', '[0-9]');
 Route::get('/post/{post}', [PostController::class, 'onePost']);
-Route::post('/post/{post}', [CommentsController::class, 'storeComment']);
 
 //Routes for all Log functionality
 Route::get('/login', [LogController::class, 'login'])
@@ -57,8 +56,10 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/comments','allComments');
     
     Route::get('/admin/users', 'allUsers');
+
+    Route::post('/post/{id}',  'storeComment');
+    Route::delete('/admin/comments/{id}', 'deleteComment');
 });
-Route::delete('/admin/comments/{id}', [CommentsController::class , 'deleteComment']);
 
 //Routes for Emails
 Route::get('/email/{name}', [EmailController::class, 'email']);

@@ -185,3 +185,6 @@
 5.0. Methods for interacting with the database:
     5.1. Posts
         All methods for interacting with the post table is place in \App\Repositories\PostRepository
+
+
+todo: comments

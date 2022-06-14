@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Mail\NewPost;
 use App\Models\{Posts, Comments, Categories, User};
-use App\Repositories\{CategoryRepository, PostRepository};
+use App\Repositories\{CategoryRepository, CommentRepository, PostRepository, UserRepository};
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -23,8 +23,9 @@ class AdminController extends Controller
 	}
 
 	public function allPosts(){
+        $user_id = Auth::user()->id;
 		$posts = new PostRepository;
-        $posts = $posts->all();
+        $posts = $posts->allFromUser($user_id);
         
 		return view(
 			'admin.posts',
@@ -52,7 +53,7 @@ class AdminController extends Controller
 
 	public function destroyPost($id) {
         $post = new PostRepository;
-        $post->destroy($id);
+        $post->delete($id);
 
 		return redirect()->back();
     }
@@ -99,15 +100,24 @@ class AdminController extends Controller
     }
 
 	public function allComments(){
-        $comments = Comments::getAllComments();
+        $comments = new CommentRepository;
+        $comments = $comments->all();
 		return view(
 			'admin.comments',
 			compact('comments')
 		);	
 	}
 
+    public function storeComment(Request $request, int $post_id){
+        $comments = new CommentRepository;
+        $comments = $comments->store($request, $post_id);
+
+        return redirect("/post/{$post_id}");
+    }
+
 	public function allUsers(){
-		$users = User::getAllUsers();
+        $users = new UserRepository;
+		$users = $users->all();
 		return view(
 			'admin.users',
 			compact('users')

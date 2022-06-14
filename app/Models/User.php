@@ -49,14 +49,14 @@ class User extends Authenticatable
     ];
 
 	public function getImageUrlAttribute(){
-		if (!$this->image){
+		if ($this->image === null){
             return Storage::url('no_image.jpg');
 		}
         return Storage::url($this->image);
 	}
 
 	public function posts(){
-		return $this->hasMany('\App\Models\Posts', 'id');
+		return $this->hasMany(Post::class);
 	}
 
 	public function name(){

@@ -17,12 +17,12 @@
 			</thead>
 			@foreach($comments as $comment)
                 <tr>
-                    <td><a href="/post/{{$comment->post->post_id}}">{{$comment->post->post_title}}</a></td>
-                    <td>{{$comment->post->post_author}}</td>
-                    <td>{{$comment->comment_content}}</td>
+                    <td><a href="/post/{{$comment->post_id}}">{{$comment->title}}</a></td>
+                    <td>{{$comment->name}}</td>
+                    <td>{{$comment->content}}</td>
                     <td>{{$comment->created_at}}</td>
                     <td>
-                        <form action="/admin/comments/{{$comment->comment_id}}" method="post">
+                        <form action="/admin/comments/{{$comment->id}}" method="post">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-default" type="submit">Delete</button>

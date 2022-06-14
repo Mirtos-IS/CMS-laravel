@@ -10,16 +10,16 @@
         </form> 
     </div>
 
-    @foreach($post->comments as $comment)
+    @foreach($comments as $comment)
     <div class="media">
         <a class="pull-left" href="#">
-            <img class="media-object" src="{{$comment->user->image_url}}" width="64" alt="">
+            <img class="media-object" src="{{$comment->image_url}}" width="64" alt="">
         </a>
         <div class="media-body">
-            <h4 class="media-heading"> {{$comment->post->post_author}}
+            <h4 class="media-heading"> {{$comment->name}}
                 <small>{{$comment->created_at}} </small>
             </h4>
-                {{$comment->comment_content}}
+                {{$comment->content}}
         </div>
     </div>
     @endforeach

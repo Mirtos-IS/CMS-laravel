@@ -13,7 +13,6 @@
 				<tr>
 					<th>Name</th>
 					<th>Email</th>
-					<th>Role</th>
 					<th>Photo</th>
 					<th>First Name</th>
 					<th>Last Name</th>
@@ -24,14 +23,13 @@
 			<tbody>
 			@foreach($users as $user)
 				<tr>
-					<td>{{$user->user_name}}</td>
-					<td>{{$user->user_email}}</td>
-					<td>{{$user->user_role}}</td>
-					<td>{{$user->user_image}}</td>
-					<td>{{$user->user_firstname}}</td>
-					<td>{{$user->user_lastname}}</td>
+					<td>{{$user->name}}</td>
+					<td>{{$user->email}}</td>
+					<td><img src="{{$user->image_url}}" width="100"></td>
+					<td>{{$user->first_name}}</td>
+					<td>{{$user->last_name}}</td>
 					<td>{{$user->created_at}}</td>
-					<td><a href="admin/users/{{$user->user_id}}">Edit</a></td>
+					<td><a href="admin/users/{{$user->id}}">Edit</a></td>
 				</tr>
 			@endforeach
 			</tbody>

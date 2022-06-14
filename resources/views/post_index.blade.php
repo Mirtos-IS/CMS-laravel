@@ -15,16 +15,16 @@
 				<!-- Post layout that gonna be looped -->
 				@foreach($posts as $post)
 				<h2>
-					<a href="/post/{{$post->post_id}}">{{$post->post_title}}</a>
+					<a href="/post/{{$post->id}}">{{$post->title}}</a>
 				</h2>
 				<p class="lead">
-					by <a href="index.php">{{$post->post_author}}</a>
+					by <a href="index.php">{{$post->author}}</a>
 				</p>
 				<p><span class="glyphicon glyphicon-time"></span>{{$post->created_at}}</p>
 				<hr>
 				<img class="img-responsive" src="{{$post->image_url}}" alt="">
 				<hr>
-				<p>{{$post->post_content}}</p>
+				<p>{{$post->content}}</p>
 
 				<hr>
 				@endforeach
