@@ -123,5 +123,12 @@ class AdminController extends Controller
 			compact('users')
 		);
 	}
+
+    public function profile(){
+        $user_id = Auth::user()->id;
+        $numberOfPosts = new PostRepository;
+        $numberOfPosts = $numberOfPosts->count($user_id);
+        return view('admin.profile', ['numberOfPosts' => $numberOfPosts->numberOfPosts]);
+    }
 }
 

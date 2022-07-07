@@ -59,6 +59,8 @@ Route::controller(AdminController::class)->group(function () {
 
     Route::post('/post/{id}',  'storeComment');
     Route::delete('/admin/comments/{id}', 'deleteComment');
+
+    Route::get ('/admin/profile', 'profile');
 });
 
 //Routes for Emails

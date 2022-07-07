@@ -87,4 +87,9 @@ class PostRepository
 		Post::destroy($id);
         DB::commit();
 	}
+
+    public function count(int $id) {
+        $numberOfPosts = DB::select("SELECT count(*) as numberOfPosts FROM posts WHERE user_id = {$id}");
+        return $numberOfPosts[0];
+    }
 }
